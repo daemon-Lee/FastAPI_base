@@ -15,7 +15,7 @@ def read_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
 
 @app.get("/about")
-def show_about():
+async def show_about():
     return {"message": "here is about"}
 
 class User(BaseModel):
@@ -25,7 +25,7 @@ class User(BaseModel):
     friends: List[int] = []
 
 @app.get("/users/me")
-def read_user_me():
+async def read_user_me():
     external_data = {
         'id': '123',
         'signup_ts': '2019-06-01 12:22',
