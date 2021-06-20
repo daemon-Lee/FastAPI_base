@@ -3,7 +3,7 @@ import os
 
 def create_app(config=None):
     # Define the WSGI application object
-    app = app = FastAPI(__name__)
+    app = FastAPI()
 
     # load app sepcified configuration
     if config is not None:
@@ -17,3 +17,5 @@ def create_app(config=None):
         return {"message" : "hello world + 1"}
 
     return app
+
+app = create_app()
