@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 import os
 
+# from .test_tem import router
+
 def create_app(config=None):
     # Define the WSGI application object
     app = FastAPI()
@@ -13,7 +15,7 @@ def create_app(config=None):
             app.config.from_pyfile(config)
     
     @app.get("/")
-    def hello_world():
+    async def hello_world():
         return {"message" : "hello world + 1"}
 
     return app
