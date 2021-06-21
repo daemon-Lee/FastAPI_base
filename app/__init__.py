@@ -2,6 +2,8 @@ from fastapi import FastAPI
 import os
 
 # from .test_tem import router
+from app.simple_router import simple
+
 
 def create_app(config=None):
     # Define the WSGI application object
@@ -21,3 +23,4 @@ def create_app(config=None):
     return app
 
 app = create_app()
+app.include_router(simple)
