@@ -1,28 +1,33 @@
-from fastapi import FastAPI
 from typing import Optional, List
-from pydantic import BaseModel
 from datetime import datetime
 from enum import Enum
+from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI()
 
+
 @app.get("/")
 def hello_world():
-    return {"message" : "hello world + 1"}
+    return {"message": "hello world + 1"}
+
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
 
+
 @app.get("/about")
 async def show_about():
     return {"message": "here is about"}
+
 
 class User(BaseModel):
     id: int
     name = 'John Doe'
     signup_ts: Optional[datetime] = None
     friends: List[int] = []
+
 
 @app.get("/users/me")
 async def read_user_me():
@@ -34,10 +39,12 @@ async def read_user_me():
     user = User(**external_data)
     return user
 
+
 class ModelName(str, Enum):
     alexnet = "alexnet"
     resnet = "resnet"
     lenet = "lenet"
+
 
 @app.get("/models/{model_name}")
 async def get_model(model_name: ModelName):
@@ -49,8 +56,9 @@ async def get_model(model_name: ModelName):
 
     return {"model_name": model_name, "message": "Have some residuals"}
 
+
 @app.get("/files/{file_path:path}")
 async def read_file(file_path: str):
     return {"file_path": file_path}
-# In that case, the URL would be: /files//home/johndoe/myfile.txt, with a double slash (//) between files and home.
-
+# In that case, the URL would be: /files//home/johndoe/myfile.txt,
+#  with a double slash (//) between files and home.

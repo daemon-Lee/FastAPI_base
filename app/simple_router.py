@@ -10,6 +10,7 @@ templates = Jinja2Templates(directory="app/templates")
 async def simple_page():
     return {"message": "here is simple router"}
 
+
 @simple.get('/base')
 async def base_page(request: Request):
 
